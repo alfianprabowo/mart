@@ -1,0 +1,17 @@
+h2
+  | Daftar Barang
+a href="#{new_item_path}"
+  button.btn.btn-primary type="button" 
+    i.fas.fa-plus 
+    |   Tambah Barang
+table class="table"
+  thead
+    th Code
+    th Name
+    th Kategori
+    th Beli
+    th Jual
+    th Action
+  tbody
+    = render partial: 'list', collection: @items, as: :item
+= paginate @items

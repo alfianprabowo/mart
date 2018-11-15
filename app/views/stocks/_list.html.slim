@@ -1,0 +1,9 @@
+tr
+  td #{inventory.item.code}
+  td #{inventory.item.name}
+  td #{inventory.item.item_cat.name}
+  td #{inventory.stock}
+  td #{inventory.item.sell}
+  td
+    a href='#{edit_stock_path(id: inventory.id)}' Edit
+

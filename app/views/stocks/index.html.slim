@@ -1,0 +1,13 @@
+h2
+  | Daftar Stok Barang
+table class="table"
+  thead
+    th Code
+    th Name
+    th Kategori
+    th Stok
+    th Harga
+    th Aksi
+  tbody
+    = render partial: 'list', collection: @inventories, as: :inventory
+= paginate @inventories

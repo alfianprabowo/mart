@@ -1,0 +1,28 @@
+files: ["**/*.js"] # No need to put app/assets/ or vendor/assets here
+include_paths: ['javascripts/pack']
+<%# exclude_paths: ['app/assets/'] %>
+exclude_files: ["**/webfont.js", "**/mui.min.js"]
+options:
+  boss:       true
+  node:       true
+  browser:    true
+  camelcase:  true
+  curly:      true
+  eqeqeq:     true
+  eqnull:     true
+  expr:       true
+  esnext:     true
+  immed:      true
+  indent:     2
+  latedef:    true
+  maxlen:     100
+  newcap:     true
+  noarg:      true
+  quotmark:  "single"
+  sub:        true
+  trailing:   true
+  undef:      true
+  unused:     true
+  globals:
+    jQuery:   true
+    "$":      true

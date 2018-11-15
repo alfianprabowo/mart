@@ -1,0 +1,25 @@
+main#content.content.container-100.c-desktop
+  section.register
+    .container
+      .d-flex.justify-content-center
+        .col-md-12.cart__title.text-center
+            br
+            img.header__img alt=("CANTIK MART") src="images/logo.jpg" /
+    .container
+      .d-flex.justify-content-center
+        .col-md-4
+        .col-md-4
+            br
+            p.card__title.text-center
+               | Silahkan Masukkan E-mail dan Password Anda
+            = form_for :session, url: session_path do |form|
+              .col-3
+                .form-group
+                  label for="email" Email
+                  = form.text_field :email, required: true, class: "form-control", id: "email"
+              .form-group
+                label for="code" Password
+                = form.password_field :password, required: true, class: "form-control", id: "password"
+              .form-group.text-center
+                  = form.submit "Sign In", class: "btn btn-primary"
+
