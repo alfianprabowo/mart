@@ -1,3 +1,3 @@
 # README
 
-This is Prototype for Bank Soal created by Wellcode Global&copy;
+This is Prototype developing with Ruby on Rails and PostgreSQL for Cantik Mart created by PT. PARAHYANGAN DIGITAL DEV&copy;
