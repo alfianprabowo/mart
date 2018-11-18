@@ -28,6 +28,7 @@ gem 'webpacker', '~> 3.5'
 gem 'wicked_pdf', '~> 1.1'
 gem 'wkhtmltopdf-heroku'
 gem 'administrate'
+gem 'brakeman'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

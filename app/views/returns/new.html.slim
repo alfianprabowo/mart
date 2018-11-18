@@ -1,0 +1,70 @@
+h2
+  | BUAT RETUR
+.row
+  .col-md-6
+    .form-group
+      label for="from" Dari
+      input type="text" class="form-control" disabled=true value="#{current_user.store.name}"
+  .col-md-6
+    .form-group
+      label for="from" Kepada
+      input type="text" class="form-control" disabled=true value="GUDANG"
+hr style="border-top: 1px solid black;"
+.row
+  .col-md-12.text-right
+    button class="btn btn-primary"
+      | + Item
+
+= form_for :return, url: returns_path, method: "POST" do |form|
+  .col-md-4
+    .form-group
+      label for="item" Item
+      select class="selectpicker form-control" data-show-subtext="true" data-live-search="true" name="return[return_items][0][item_id]"
+        option data-subtext="id: 6" value= 6
+          | A
+        option data-subtext="id: 7" value=7
+          | B
+  .col-md-4
+    .form-group
+      label for="quantity" Jumlah
+      input type="number" required=true class="form-control" id="quantity" name="return[return_items][0][quantity]"
+  .col-md-4
+    .form-group
+      label for="description" Deskripsi
+      input type="number" required=true class="form-control" id="description" name="return[return_items][0][description]"
+  
+  .col-md-4
+    .form-group
+      label for="item" Item
+      select class="selectpicker form-control" data-show-subtext="true" data-live-search="true" name="return[return_items]1][item_id]"
+        option data-subtext="id: 6" value=6
+          | A
+        option data-subtext="id: 7" value=7
+          | B
+  .col-md-4
+    .form-group
+      label for="quantity" Jumlah
+      input type="number" required=true class="form-control" id="quantity" name="return[return_items][1][quantity]"
+  .col-md-4
+    .form-group
+      label for="description" Deskripsi
+      input type="number" required=true class="form-control" id="description" name="return[return_items][1][description]"
+  
+  .col-md-4
+    .form-group
+      label for="item" Item
+      select class="selectpicker form-control" data-show-subtext="true" data-live-search="true" name="return[return_items][2][item_id]"
+        option data-subtext="id: 6" value=6
+          | A
+        option data-subtext="id: 7" value=7
+          | B
+  .col-md-4
+    .form-group
+      label for="quantity" Jumlah
+      input type="number" required=true class="form-control" id="quantity" name="return[return_items][2][quantity]"
+  .col-md-4
+    .form-group
+      label for="description" Deskripsi
+      input type="number" required=true class="form-control" id="description" name="return[return_items][2][description]"
+  .form-group.text-center
+    = form.submit "Buat Retur", class: "btn btn-primary"

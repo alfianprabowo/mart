@@ -1,0 +1,16 @@
+h2
+  | Daftar User
+a href="#{new_user_path}"
+  button.btn.btn-primary type="button" 
+    i.fas.fa-plus 
+    |   Tambah User
+table class="table"
+  thead
+    th Name
+    th No. Telp
+    th Alamat
+    th Jenis Kelamin
+    th Action
+  tbody
+    = render partial: 'list', collection: @users, as: :user
+= paginate @users

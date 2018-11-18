@@ -1,0 +1,19 @@
+tr
+  td #{rturn.invoice}
+  td #{rturn.total_items}
+  td #{rturn.store.name}
+  td #{rturn.date_created}
+  td
+    - if rturn.status.nil?
+      | - 
+    - else
+      #{rturn.status.localtime}
+  td
+    a href='#{edit_return_path(id: rturn.id)}'
+      button class="btn btn-primary"
+        | Edit
+    | &nbsp
+    a href='#{return_items_path(id: rturn.id)}'
+      button class="btn btn-primary"
+        | Item
+

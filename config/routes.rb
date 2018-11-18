@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
 
   namespace :admin do
-      resources :items
-      resources :item_cats
       resources :users
+      resources :stores
 
-      root to: "items#index"
+      root to: "users#index"
     end
   root :to => "homes#index"
 
@@ -20,4 +19,10 @@ Rails.application.routes.draw do
   resources :items, only: %i[index new create edit update]
   resources :item_cats, only: %i[index new create edit update]
   resources :stocks, only: %i[index edit update]
+  resources :users, only: %i[index new create edit update]
+  resources :stores, only: %i[index new create edit update]
+  resources :members, only: %i[index new create edit update]
+  resources :returns, only: %i[index new create edit update]
+  resources :return_items, only: %i[index new create edit update]
+
 end

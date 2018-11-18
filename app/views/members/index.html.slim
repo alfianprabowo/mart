@@ -1,0 +1,17 @@
+h2
+  | Daftar Member
+a href="#{new_member_path}"
+  button.btn.btn-primary type="button" 
+    i.fas.fa-plus 
+    |   Tambah Member
+table class="table"
+  thead
+    th Name
+    th Nomor Telepon
+    th Alamat
+    th Nomor Kartu
+    th Jenis Kelamin
+    th Action
+  tbody
+    = render partial: 'list', collection: @members, as: :member
+= paginate @members
