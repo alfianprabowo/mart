@@ -8,7 +8,6 @@ end
 ruby '2.5.1'
 
 
-gem 'carrierwave', '~> 1.0'
 gem 'clearance'
 gem 'creek'
 gem 'faker'
