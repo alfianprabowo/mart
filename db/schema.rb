@@ -40,24 +40,25 @@ ActiveRecord::Schema.define(version: 2018_11_18_120230) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "return_items", force: :cascade do |t|
+  create_table "retur_items", force: :cascade do |t|
     t.bigint "item_id", null: false
-    t.bigint "return_id", null: false
+    t.bigint "retur_id", null: false
     t.integer "quantity", null: false
     t.string "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["item_id"], name: "index_return_items_on_item_id"
-    t.index ["return_id"], name: "index_return_items_on_return_id"
+    t.index ["item_id"], name: "index_retur_items_on_item_id"
+    t.index ["retur_id"], name: "index_retur_items_on_retur_id"
   end
 
-  create_table "returns", force: :cascade do |t|
+  create_table "returs", force: :cascade do |t|
     t.string "invoice", null: false
     t.integer "total_items", null: false
     t.bigint "store_id", null: false
     t.datetime "date_created"
+    t.datetime "date_picked"
     t.datetime "status"
-    t.index ["store_id"], name: "index_returns_on_store_id"
+    t.index ["store_id"], name: "index_returs_on_store_id"
   end
 
   create_table "store_items", force: :cascade do |t|
@@ -115,9 +116,9 @@ ActiveRecord::Schema.define(version: 2018_11_18_120230) do
   end
 
   add_foreign_key "items", "item_cats"
-  add_foreign_key "return_items", "items"
-  add_foreign_key "return_items", "returns"
-  add_foreign_key "returns", "stores"
+  add_foreign_key "retur_items", "items"
+  add_foreign_key "retur_items", "returs"
+  add_foreign_key "returs", "stores"
   add_foreign_key "store_items", "items"
   add_foreign_key "store_items", "stores"
   add_foreign_key "supplier_items", "items"

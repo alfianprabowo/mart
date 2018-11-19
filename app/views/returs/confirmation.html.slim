@@ -1,0 +1,32 @@
+h2
+  | KONFIRMASI RETUR
+.row
+  .col-md-12
+    label for="form" INVOICE
+    input type="text" class="form-control" disabled=true value="#{@retur.invoice}"
+  .col-md-4
+    label for="form" Total
+    input type="number" class="form-control" disabled=true value="#{@retur.total_items}"
+  .col-md-4
+    .form-group
+      label for="from" Dari
+      input type="text" class="form-control" disabled=true value="#{current_user.store.name}"
+  .col-md-4
+    .form-group
+      label for="from" Kepada
+      input type="text" class="form-control" disabled=true value="GUDANG"
+hr style="border-top: 1px solid black;"
+.row
+  .col-md-12
+      table class="table"
+        thead
+          th Barang
+          th Kategori
+          th Jumlah
+          th Deskripsi
+        tbody
+          = render partial: 'conflist', collection: @retur_items, as: :r_item
+  .col-md-12
+    = form_for :retur, url: retur_accept_path, method: "POST" do |form|
+      .form-group.text-center
+        = form.submit "Konfirmasi Retur", class: "btn btn-primary"

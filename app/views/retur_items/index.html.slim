@@ -1,0 +1,11 @@
+h2
+  | Daftar Item Retur (#{@retur_items.first.retur.invoice})
+table class="table"
+  thead
+    th Kode
+    th Name
+    th Kuantiti
+    th Deskripsi
+  tbody
+    = render partial: 'list', collection: @retur_items, as: :ret_item
+= paginate @retur_items

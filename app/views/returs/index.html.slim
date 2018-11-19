@@ -1,6 +1,6 @@
 h2
   | Daftar Retur
-a href="#{new_return_path}"
+a href="#{new_retur_path}"
   button.btn.btn-primary type="button" 
     i.fas.fa-plus 
     |   Buat Retur
@@ -11,7 +11,8 @@ table class="table"
     th Dari
     th Tanggal
     th Status
+    th Diambil
     th Action
   tbody
-    = render partial: 'list', collection: @returns, as: :rturn
-= paginate @returns
+    = render partial: 'list', collection: @returs, as: :retur
+= paginate @returs

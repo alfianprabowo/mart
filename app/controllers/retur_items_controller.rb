@@ -1,9 +1,9 @@
-class ReturnItemsController < ApplicationController
+class ReturItemsController < ApplicationController
   before_action :require_login
   def index
     return redirect_back_no_access_right unless params[:id].present?
-    @return_items = ReturnItem.page param_page
-    @return_items = @return_items.where(return_id: params[:id])
+    @retur_items = ReturItem.page param_page
+    @retur_items = @retur_items.where(retur_id: params[:id])
   end
 
   private

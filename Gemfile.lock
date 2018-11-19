@@ -85,6 +85,10 @@ GEM
     capybara-webkit (1.15.1)
       capybara (>= 2.3, < 4.0)
       json
+    carrierwave (1.2.3)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
     clearance (1.16.1)
@@ -526,6 +530,7 @@ DEPENDENCIES
   capybara
   capybara-screenshot
   capybara-webkit
+  carrierwave
   clearance
   creek
   database_cleaner

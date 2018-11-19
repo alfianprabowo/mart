@@ -1,0 +1,24 @@
+tr
+  td #{retur.invoice}
+  td #{retur.total_items}
+  td #{retur.store.name}
+  td #{retur.date_created}
+  td
+    - if retur.status.nil?
+      | - 
+    - else
+      | DITERIMA - #{retur.status.localtime}
+  td
+    - if retur.date_picked.nil?
+      | - 
+    - else
+       #{retur.date_picked.localtime}
+  td
+    a href='#{edit_retur_path(id: retur.id)}'
+      button class="btn btn-primary"
+        | Edit
+    | &nbsp
+    a href='#{retur_items_path(id: retur.id)}'
+      button class="btn btn-primary"
+        | Item
+

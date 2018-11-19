@@ -1,6 +1,6 @@
-class Return < ApplicationRecord
+class Retur < ApplicationRecord
   validates :total_items, :store_id, presence: true
-  has_many :return_items
+  has_many :retur_items
   belongs_to :store
 end
 
