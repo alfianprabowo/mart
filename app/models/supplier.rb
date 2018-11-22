@@ -1,5 +1,9 @@
 class Supplier < ApplicationRecord
-  validates :level, :email, presence: true
+  validates :pic, :address, :phone, presence: true
   has_many :supplier_items
-  default_scope { order(created_at: :desc) }
+  has_many :returs
+  enum supplier_type:{
+    supplier: 0,
+    warehouse: 1
+  }
 end

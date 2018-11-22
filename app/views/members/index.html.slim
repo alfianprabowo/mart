@@ -1,9 +1,12 @@
-h2
-  | Daftar Member
-a href="#{new_member_path}"
-  button.btn.btn-primary type="button" 
-    i.fas.fa-plus 
-    |   Tambah Member
+.row
+  .col-md-6
+    h2
+      | Daftar Member
+  .col-md-6.text-right
+    a href="#{new_member_path}"
+      button.btn.btn-primary type="button" 
+        i.fas.fa-plus 
+        |   Tambah Member
 table class="table"
   thead
     th Name

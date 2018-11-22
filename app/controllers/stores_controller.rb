@@ -12,6 +12,12 @@ class StoresController < ApplicationController
     store = Store.new store_params
     return redirect_to new_store_path if store.invalid?
 
+    supplier = Supplier.new pic: "GUDANG - "+params[:store][:name],
+      phone: params[:store][:phone],
+      address: params[:store][:address],
+      supplier_type: 1
+    return redirect_to new_store_path if supplier.invalid?
+
     store.save!
     return redirect_to stores_path
   end
@@ -34,7 +40,7 @@ class StoresController < ApplicationController
   private
     def store_params
       params.require(:store).permit(
-        :name, :address, :phone
+        :name, :address, :phone, :store_type
       )
     end
 

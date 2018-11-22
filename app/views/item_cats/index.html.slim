@@ -1,9 +1,12 @@
-h2
-  | Daftar Kategori Barang
-a href="#{new_item_cat_path}"
-  button.btn.btn-primary type="button" 
-    i.fas.fa-plus 
-    |   Tambah Kategori
+.row
+  .col-md-6
+    h2
+      | Daftar Kategori Barang
+  .col-md-6.text-right
+    a href="#{new_item_cat_path}"
+      button.btn.btn-primary type="button" 
+        i.fas.fa-plus 
+        |   Tambah Kategori
 table class="table"
   thead
     th Name

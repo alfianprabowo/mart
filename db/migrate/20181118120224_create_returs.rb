@@ -4,9 +4,11 @@ class CreateReturs < ActiveRecord::Migration[5.2]
       t.string :invoice, null: false
       t.integer :total_items, null: false
       t.references :store, foreign_key: true, null: false
+      t.references :supplier, foreign_key:true, null: false
       t.datetime :date_created, default: 'CURRENT_TIMESTAMP'
       t.datetime :date_picked, default: 'CURRENT_TIMESTAMP'
-      t.datetime :status
+      t.datetime :date_approve, default: 'CURRENT_TIMESTAMP'
+      t.datetime :status, default: 'CURRENT_TIMESTAMP'
     end
   end
 end

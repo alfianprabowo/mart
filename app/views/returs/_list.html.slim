@@ -2,22 +2,28 @@ tr
   td #{retur.invoice}
   td #{retur.total_items}
   td #{retur.store.name}
+  td #{retur.supplier.pic}
   td #{retur.date_created}
   td
-    - if retur.status.nil?
+    - if retur.date_approve.nil?
       | - 
     - else
-      | DITERIMA - #{retur.status.localtime}
+      | #{retur.date_approve.to_date}
   td
     - if retur.date_picked.nil?
       | - 
     - else
-       #{retur.date_picked.localtime}
+      | #{retur.date_picked.to_date}
   td
-    a href='#{edit_retur_path(id: retur.id)}'
-      button class="btn btn-primary"
-        | Edit
-    | &nbsp
+    - if retur.status.nil?
+      | -
+    - else
+      | SELESAI - #{retur.status}
+
+  td
+    = form_for :retur, url: retur_path(id: retur.id), method: "DELETE" do |form|
+      = form.submit "Hapus", class: "btn btn-danger"
+  td
     a href='#{retur_items_path(id: retur.id)}'
       button class="btn btn-primary"
         | Item

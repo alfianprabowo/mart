@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_18_120230) do
+ActiveRecord::Schema.define(version: 2018_11_20_103041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,8 +45,10 @@ ActiveRecord::Schema.define(version: 2018_11_18_120230) do
     t.bigint "retur_id", null: false
     t.integer "quantity", null: false
     t.string "description", null: false
+    t.integer "feedback", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "accept_item", default: 0
     t.index ["item_id"], name: "index_retur_items_on_item_id"
     t.index ["retur_id"], name: "index_retur_items_on_retur_id"
   end
@@ -55,10 +57,13 @@ ActiveRecord::Schema.define(version: 2018_11_18_120230) do
     t.string "invoice", null: false
     t.integer "total_items", null: false
     t.bigint "store_id", null: false
+    t.bigint "supplier_id", null: false
     t.datetime "date_created"
     t.datetime "date_picked"
+    t.datetime "date_approve"
     t.datetime "status"
     t.index ["store_id"], name: "index_returs_on_store_id"
+    t.index ["supplier_id"], name: "index_returs_on_supplier_id"
   end
 
   create_table "store_items", force: :cascade do |t|
@@ -77,6 +82,7 @@ ActiveRecord::Schema.define(version: 2018_11_18_120230) do
     t.bigint "phone", default: 1234567, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "store_type", default: 0
   end
 
   create_table "supplier_items", force: :cascade do |t|
@@ -94,6 +100,7 @@ ActiveRecord::Schema.define(version: 2018_11_18_120230) do
     t.string "pic", default: "DEFAULT NAME SUPPLIER", null: false
     t.string "address", default: "DEFAULT ADDRESS SUPPLIER", null: false
     t.bigint "phone", default: 123456789, null: false
+    t.integer "supplier_type", default: 0
   end
 
   create_table "users", force: :cascade do |t|
@@ -119,6 +126,7 @@ ActiveRecord::Schema.define(version: 2018_11_18_120230) do
   add_foreign_key "retur_items", "items"
   add_foreign_key "retur_items", "returs"
   add_foreign_key "returs", "stores"
+  add_foreign_key "returs", "suppliers"
   add_foreign_key "store_items", "items"
   add_foreign_key "store_items", "stores"
   add_foreign_key "supplier_items", "items"

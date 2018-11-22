@@ -1,5 +1,5 @@
 h2
-  | KONFIRMASI RETUR
+  | FEEDBACK RETUR
 .row
   .col-md-12
     label for="form" INVOICE
@@ -25,9 +25,10 @@ hr style="border-top: 1px solid black;"
             th Kategori
             th Jumlah
             th Deskripsi
-            th Cek Jumlah
+            th Feedback
+            th Nominal
           tbody
-            = render partial: 'conflist', collection: @retur_items, as: :r_item
+            = render partial: 'feedlist', collection: @retur_items, as: :r_item
     .col-md-12
       .form-group.text-center
-        = form.submit "Konfirmasi Retur", class: "btn btn-primary"
+        = form.submit "Buat Feedback", class: "btn btn-primary"

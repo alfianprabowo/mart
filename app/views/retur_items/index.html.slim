@@ -1,11 +1,27 @@
-h2
-  | Daftar Item Retur (#{@retur_items.first.retur.invoice})
+- retur_id = @retur_items.first.retur.id
+.row
+  .col-md-6
+    h2
+      | Daftar Item Retur (#{@retur_items.first.retur.invoice})
+  .col-md-6.text-right
+    a href="#{retur_feedback_path(id: retur_id)}"
+      button class="btn btn-primary"
+        | FEEDBACK
+    |  
+    a href="#{retur_confirmation_path(id: retur_id)}"
+      button class="btn btn-warning"
+        | KONFIRMASI
+    |  
+    = form_for :retur_items, url: "#{retur_picked_path(id: retur_id)}", method: "POST" do |form|
+      = form.submit "Ambil", class: "btn btn-success"
 table class="table"
   thead
     th Kode
     th Name
     th Kuantiti
+    th Konfirmasi Jumlah
     th Deskripsi
+    th Hasil
   tbody
     = render partial: 'list', collection: @retur_items, as: :ret_item
 = paginate @retur_items

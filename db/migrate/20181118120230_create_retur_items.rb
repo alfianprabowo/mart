@@ -5,7 +5,7 @@ class CreateReturItems < ActiveRecord::Migration[5.2]
       t.references :retur, foreign_key: true, null: false
       t.integer :quantity, null: false
       t.string :description, null: false
-
+      t.integer :feedback, default: 0
       t.timestamps
     end
   end
