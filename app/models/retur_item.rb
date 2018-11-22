@@ -4,12 +4,12 @@ class ReturItem < ApplicationRecord
   belongs_to :retur
 
   enum feedback: {
-    cashback: 1,
+    cash: 1,
     retur_item: 2,
     loss: 3
   }
 
-  CASHBACK = 'cashback'
+  CASH = 'cash'
   RETUR_ITEM = 'retur_item'
   LOSS = 'loss'
 end

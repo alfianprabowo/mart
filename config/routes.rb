@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   post 'retur/:id/confirmation', to: 'returs#accept', as: 'retur_accept'
   post 'retur/:id/picked', to: 'returs#picked', as: 'retur_picked'
   get 'retur/:id/feedback', to: 'retur_items#feedback', as: 'retur_feedback'
-  post 'retur/:id/confirm_feedback', to: 'retur_items#feedback', as: 'retur_feedback_confirmation'
+  post 'retur/:id/confirm_feedback', to: 'retur_items#feedback_confirmation', as: 'retur_feedback_confirmation'
   delete '/sign_out', to: 'sessions#destroy'
   #
 

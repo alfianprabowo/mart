@@ -21,6 +21,8 @@ class RetursController < ApplicationController
       supplier_id: address_to
 
     items.each do |item|
+      item = Item.find item[0]
+      break if item.nil?
       ReturItem.create item_id: item[0], retur_id: retur.id, quantity: item[1], description: item[2]
     end
     return redirect_to returs_path
@@ -29,6 +31,7 @@ class RetursController < ApplicationController
   def confirmation
     return redirect_back_no_access_right unless params[:id].present?
     @retur = Retur.find params[:id]
+    return redirect_back_no_access_right unless @retur.date_picked.present?
     return redirect_to returs_path unless @retur.present?
     @retur_items = ReturItem.where(retur_id: @retur.id)
   end
@@ -36,6 +39,7 @@ class RetursController < ApplicationController
   def accept
     return redirect_back_no_access_right unless params[:id].present?
     retur = Retur.find params[:id]
+    return redirect_back_no_access_right unless @retur.date_picked.present?
     return redirect_back_no_access_right if retur.nil?
     items = retur_items
     items.each do |item|
@@ -54,8 +58,10 @@ class RetursController < ApplicationController
     return redirect_back_no_access_right unless params[:id].present?
     retur = Retur.find params[:id]
     return redirect_back_no_access_right if retur.nil?
+    # return redirect_back_no_access_right if retur.date_picked.present?
     retur.date_picked = Time.now
     retur.save!
+    decrease_stock params[:id]
     return redirect_to returs_path
   end
 
@@ -76,6 +82,17 @@ class RetursController < ApplicationController
         items << item[1].values
       end
       items
+    end
+
+    def decrease_stock retur_id
+      retur_items = ReturItem.where(retur_id: retur_id)
+      retur_items.each do |retur_item|
+        confirmation = retur_item.accept_item
+        item = StoreItem.find_by(item_id: retur_item.item.id, store_id: current_user.store.id)
+        new_stock = item.stock.to_i - confirmation.to_i
+        item.stock = new_stock
+        item.save!
+      end
     end
 
     def param_page

@@ -17,7 +17,7 @@ h2
       input type="text" class="form-control" disabled=true value="#{@retur.supplier.pic}"
 hr style="border-top: 1px solid black;"
 .row
-  = form_for :retur, url: retur_accept_path, method: "POST" do |form|
+  = form_for :retur, url: retur_feedback_confirmation_path, method: "POST" do |form|
     .col-md-12
         table class="table"
           thead
