@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_22_134531) do
+ActiveRecord::Schema.define(version: 2018_12_03_122858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,33 @@ ActiveRecord::Schema.define(version: 2018_11_22_134531) do
     t.integer "supplier_type", default: 0
   end
 
+  create_table "transfer_items", force: :cascade do |t|
+    t.bigint "transfer_id", null: false
+    t.bigint "item_id", null: false
+    t.integer "request_quantity", default: 1, null: false
+    t.integer "sent_quantity", default: 0
+    t.integer "receive_quantity", default: 0
+    t.string "description", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_transfer_items_on_item_id"
+    t.index ["transfer_id"], name: "index_transfer_items_on_transfer_id"
+  end
+
+  create_table "transfers", force: :cascade do |t|
+    t.string "invoice", null: false
+    t.datetime "date_created", null: false
+    t.datetime "date_approve"
+    t.datetime "date_picked"
+    t.datetime "date_confirm"
+    t.datetime "status"
+    t.integer "total_items"
+    t.bigint "from_store_id", null: false
+    t.bigint "to_store_id", null: false
+    t.index ["from_store_id"], name: "index_transfers_on_from_store_id"
+    t.index ["to_store_id"], name: "index_transfers_on_to_store_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
@@ -132,5 +159,9 @@ ActiveRecord::Schema.define(version: 2018_11_22_134531) do
   add_foreign_key "store_items", "stores"
   add_foreign_key "supplier_items", "items"
   add_foreign_key "supplier_items", "suppliers"
+  add_foreign_key "transfer_items", "items"
+  add_foreign_key "transfer_items", "transfers"
+  add_foreign_key "transfers", "stores", column: "from_store_id"
+  add_foreign_key "transfers", "stores", column: "to_store_id"
   add_foreign_key "users", "stores"
 end

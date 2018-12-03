@@ -29,6 +29,8 @@ Rails.application.routes.draw do
   resources :suppliers, only: %i[index new create edit update]
   resources :members, only: %i[index new create edit update]
   resources :returs
+  resources :transfers
   resources :retur_items, only: %i[index new create edit update]
+  resources :transfer_items, only: %i[index new create edit update]
 
 end

@@ -1,0 +1,24 @@
+.row
+  .col-md-6
+    h2
+      | Daftar Retur
+  .col-md-6.text-right
+    a href="#{new_transfer_path}"
+      button.btn.btn-primary type="button" 
+        i.fas.fa-plus 
+        |   Buat Permintaan Transfer
+table class="table"
+  thead
+    th Invoice
+    th Total Item
+    th Dari
+    th Kepada
+    th Dibuat
+    th Disetujui SV
+    th Konfirmasi SV Tujuan
+    th Diambil
+    th Selesai
+    th Action
+  tbody
+    = render partial: 'list', collection: @transfers, as: :transfer
+= paginate @transfers

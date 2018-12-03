@@ -1,0 +1,23 @@
+.row
+  .col-md-6
+    h2
+      | Daftar Retur
+  .col-md-6.text-right
+    a href="#{new_retur_path}"
+      button.btn.btn-primary type="button" 
+        i.fas.fa-plus 
+        |   Buat Retur
+table class="table"
+  thead
+    th Invoice
+    th Total Item
+    th Dari
+    th Kepada
+    th Tgl. Buat
+    th Tgl. Konfirmasi
+    th Tgl. Ambil
+    th Selesai
+    th Action
+  tbody
+    = render partial: 'list', collection: @returs, as: :retur
+= paginate @returs
