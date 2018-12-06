@@ -28,16 +28,11 @@ Rails.application.routes.draw do
   resources :stores, only: %i[index new create edit update]
   resources :suppliers, only: %i[index new create edit update]
   resources :members, only: %i[index new create edit update]
-<<<<<<< HEAD
-  resources :returns, only: %i[index new create edit update]
-  resources :return_items, only: %i[index new create edit update]
-  resources :transaction_types, only: %i[index new create edit update]
-  resources :transactions, only: %i[index new create edit update]
-=======
   resources :returs
   resources :transfers
   resources :retur_items, only: %i[index new create edit update]
   resources :transfer_items, only: %i[index new create edit update]
->>>>>>> 7d2d1257a415f0ed047c729d6fd1364db893cd8e
+  resources :transaction_types, only: %i[index new create edit update]
+  resources :transactions, only: %i[index new create edit update]
 
 end
