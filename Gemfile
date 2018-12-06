@@ -28,6 +28,7 @@ gem 'wicked_pdf', '~> 1.1'
 gem 'wkhtmltopdf-heroku'
 gem 'administrate'
 gem 'brakeman'
+gem 'carrierwave'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

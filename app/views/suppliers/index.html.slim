@@ -1,0 +1,18 @@
+.row
+  .col-md-6
+    h2
+      | Daftar Supplier
+  .col-md-6.text-right
+    a href="#{new_supplier_path}"
+      button.btn.btn-primary type="button" 
+        i.fas.fa-plus 
+        |   Tambah Supplier
+table class="table"
+  thead
+    th Nama
+    th Alamat
+    th Telepon
+    th Action
+  tbody
+    = render partial: 'list', collection: @suppliers, as: :supplier
+= paginate @suppliers

@@ -1,12 +1,16 @@
-h2
-  | Daftar Toko
-a href="#{new_store_path}"
-  button.btn.btn-primary type="button" 
-    i.fas.fa-plus 
-    |   Tambah Toko
+.row
+  .col-md-6
+    h2
+      | Daftar Toko
+  .col-md-6.text-right
+    a href="#{new_store_path}"
+      button.btn.btn-primary type="button" 
+        i.fas.fa-plus 
+        |   Tambah Toko
 table class="table"
   thead
     th Name
+    th Tipe
     th Alamat
     th Telepon
     th Action
