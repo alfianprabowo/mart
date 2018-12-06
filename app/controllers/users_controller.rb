@@ -19,17 +19,18 @@ class UsersController < ApplicationController
   def edit
     return redirect_back_no_access_right unless params[:id].present?
     @user = User.find_by_id params[:id]
-    return redirect_to stocks_path unless user.present?
+    return redirect_to users_path unless @user.present?
   end
 
   def update
     return redirect_back_no_access_right unless params[:id].present?
     user = User.find_by_id params[:id]
+    return redirect_to users_path unless user.present?
     user.assign_attributes user_params
     user.save! if user.changed?
-    return redirect_to users__path
+    return redirect_to users_path
   end
-
+  
   private
     def user_params
       params.require(:user).permit(
