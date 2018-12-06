@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_18_120230) do
+ActiveRecord::Schema.define(version: 2018_12_03_082547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,20 @@ ActiveRecord::Schema.define(version: 2018_11_18_120230) do
     t.string "pic", default: "DEFAULT NAME SUPPLIER", null: false
     t.string "address", default: "DEFAULT ADDRESS SUPPLIER", null: false
     t.bigint "phone", default: 123456789, null: false
+  end
+
+  create_table "table_trx_types", force: :cascade do |t|
+    t.string "name", default: "DEFAULT", null: false
+  end
+
+  create_table "transaction_items", force: :cascade do |t|
+  end
+
+  create_table "transaction_types", force: :cascade do |t|
+    t.string "name", null: false
+  end
+
+  create_table "transactions", force: :cascade do |t|
   end
 
   create_table "users", force: :cascade do |t|
