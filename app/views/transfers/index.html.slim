@@ -1,8 +1,16 @@
 .row
-  .col-md-6
+  .col-md-4
     h2
-      | Daftar Retur
-  .col-md-6.text-right
+      | Daftar Transfer #{"(PENCARIAN '"+@search+"')" if @search.present?}
+  .col-md-4
+    .row
+      = form_for :transfer, url: transfers_path, method: 'GET' do |form|
+        .col-md-10
+          input type="text" class="form-control" id="search" name="search"
+        .col-md-2
+          button class="btn btn-primary"
+            | Cari
+  .col-md-4.text-right
     a href="#{new_transfer_path}"
       button.btn.btn-primary type="button" 
         i.fas.fa-plus 
@@ -14,10 +22,9 @@ table class="table"
     th Dari
     th Kepada
     th Dibuat
-    th Disetujui SV
-    th Konfirmasi SV Tujuan
-    th Diambil
-    th Selesai
+    th Disetujui
+    th Kirim
+    th Terima
     th Action
   tbody
     = render partial: 'list', collection: @transfers, as: :transfer

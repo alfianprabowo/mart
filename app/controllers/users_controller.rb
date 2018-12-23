@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   before_action :require_login
   def index
     @users = User.page param_page
-    @nama = "TOBI"
   end
 
   def new
@@ -19,6 +18,7 @@ class UsersController < ApplicationController
   def edit
     return redirect_back_no_access_right unless params[:id].present?
     @user = User.find_by_id params[:id]
+    @stores = Store.all
     return redirect_to users_path unless @user.present?
   end
 

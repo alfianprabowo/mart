@@ -4,9 +4,10 @@ class TransferItemsController < ApplicationController
     return redirect_back_no_access_right unless params[:id].present?
     @transfer_items = TransferItem.page param_page
     @transfer_items = @transfer_items.where(transfer_id: params[:id])
+    @item = Item.page param_page
   end
 
-  def feedback
+  def sent
     return redirect_back_no_access_right unless params[:id].present?
     @retur = Retur.find params[:id]
     return redirect_to returs_path unless @retur.present?
@@ -14,7 +15,7 @@ class TransferItemsController < ApplicationController
     @retur_items = ReturItem.where(retur_id: @retur.id)
   end
 
-  def feedback_confirmation
+  def sent_confirmation
     return redirect_back_no_access_right unless params[:id].present?
     retur = Retur.find params[:id]
     return redirect_back_no_access_right unless retur.present?
@@ -36,7 +37,7 @@ class TransferItemsController < ApplicationController
       params[:page]
     end
 
-    def feedback_value
+    def item_value
       array = []
       params[:retur][:retur_items].each do |item|
         array << item[1].values

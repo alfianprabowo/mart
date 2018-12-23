@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+        <style>
+            .overflow {
+            /*overflow: auto;*/
+            height: 65vh;
+            }
+            .ui.page.grid {
+            padding: 0 !important; 
+            }
+            .column {
+            height: 85vh;
+            }
+            .align-right{
+            text-align: right;
+            }
+            .button {
+            border-radius: 8px;
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+            cursor: pointer;
+            }
+            .button1 {
+            background-color: white; 
+            color: black; 
+            border: 2px solid #4CAF50;
+            }
+            .button1:hover {
+            background-color: #4CAF50;
+            color: white;
+            }
+        </style>
+        <link rel='stylesheet' href='http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/css/semantic.min.css'>
+        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+        <link rel="stylesheet" href="/assets/css/cashier.css">
+    </head>
+    <body>
+        <div class="ui grid page">
+            <div class="column">
+                <div class="ui segment">
+                    <div class="ui menu top">
+                        <a class="active item" data-tab="transaction"><i class="icon edit sign"></i>TRANSAKSI</a>
+                        <a class="item" data-tab="stock">STOK</a>
+                        <a class="item" data-tab="member">MEMBER</a>
+                    </div>
+                    <div class="ui tab" data-tab="transaction">
+                        <div class="ui form">
+                            <div class="four fields">
+                                <div class="field">
+                                    <label>KODE BARANG</label>
+                                    <input type="text" placeholder="123456789" id="itemId"/>
+                                </div>
+                                <div class="field">
+                                    <label>JUMLAH</label>
+                                    <input type="number" value="1" min="1" id="item_qty"/>
+                                </div>
+                                <div class="field align-right">
+                                    <label style="font-size: 15px;">TOTAL BELANJA</label>
+                                    <label style="font-size: 40px; font-weight: 990;" id="label-total">0</label>
+                                </div>
+                                <div class="field align-right">
+                                    <label></label>
+                                    <button data-target="modal1" class="btn-large modal-trigger">BAYAR</button>
+                                </div>
+                            </div>
+                            <div class="one fields">
+                                <hr>
+                                <br>
+                                <div class="overflow">
+                                    <table id="itemList" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th class="width10">Kode</th>
+                                                <th class="width25">Nama Barang</th>
+                                                <th class="width15">Kategori</th>
+                                                <th class="width15">Jumlah</th>
+                                                <th class="width15">Harga</th>
+                                                <th class="width15">Diskon</th>
+                                                <th class="width15">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui tab" data-tab="member">
+                        <div class="four fields">
+                                <div class="field">
+                                    <label>CARI MEMBER</label>
+                                    <input type="text" placeholder="Nama Member / No. Telp / Alamat" id="memberSearchId"/>
+                                </div>
+                            </div>
+                            <div class="one fields">
+                                <br>
+                                <div class="overflow">
+                                    <table id="memberSearchList" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th class="width10">Nama</th>
+                                                <th class="width25">Alamat</th>
+                                                <th class="width15">Telepon</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="ui tab" data-tab="stock">
+                        <div class="four fields">
+                                <div class="field">
+                                    <label>CARI BARANG</label>
+                                    <input type="text" placeholder="Nama Barang..." id="itemSearchId"/>
+                                </div>
+                            </div>
+                            <div class="one fields">
+                                <br>
+                                <div class="overflow">
+                                    <table id="itemSearchList" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th class="width10">Kode</th>
+                                                <th class="width25">Nama Barang</th>
+                                                <th class="width15">Kategori</th>
+                                                <th class="width15">Harga</th>
+                                                <th class="width15">Stok</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Structure -->
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <div style="text-align: right;">
+                    <b>
+                        <h8>PEMBAYARAN</h8>
+                    </b>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col s3" style="vertical-align: middle;">
+                        <h5>Total </h5>
+                    </div>
+                    <div class="col s1" style="vertical-align: middle;">
+                        <h5>: </h5>
+                    </div>
+                    <div class="col s8">
+                        <b>
+                            <h5 id="total-h5"></h5>
+                        </b>
+                    </div>
+                </div>
+                <hr>
+                <br>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <select id="payment-method-select" onchange="PaymentMethod()">
+                            <option value="1" selected>Tunai</option>
+                            <option value="2">Debit</option>
+                            <option value="3">Kredit</option>
+                        </select>
+                        <label>Tipe Pembayaran</label>
+                    </div>
+                    <div style="display: none;" id="card">
+                        <div class="input-field col s6">
+                            <select id="bank-select">
+                                <option value="1" selected>BCA</option>
+                                <option value="2">Mandiri</option>
+                                <option value="3">Permata</option>
+                            </select>
+                            <label>Bank</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input type="text" placeholder="123456789" id="edc-number"/>
+                            <label>Nomor TRX (EDC)</label>
+                        </div>
+                    </div>
+                    <div class="input-field col s12" id="nominal-div">
+                        <input type="number" placeholder="123456789" id="nominal" min="0" onkeyup="exchange()" />
+                        <label>Jumlah Uang</label>
+                    </div>
+                </div>
+                <div class="row" id="change-div">
+                    <div class="col s3" style="vertical-align: middle;">
+                        <h5>Kembali </h5>
+                    </div>
+                    <div class="col s1" style="vertical-align: middle;">
+                        <h5>: </h5>
+                    </div>
+                    <div class="col s8">
+                        <b>
+                            <h5 id="change-h5">0</h5>
+                        </b>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="waves-effect waves-green btn-flat"onclick="PrintBill()" style="color: blue;">CETAK</a>
+                <a class="modal-close waves-effect waves-green btn-flat" style="color: green;" onclick="CheckOut()">KONFIRMASI</a>
+            </div>
+        </div>
+        <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/javascript/semantic.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.min.js'></script>
+        <script src='https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js'></script>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+        <script type="text/javascript" src="/assets/js/dependencies/rsvp-3.1.0.min.js"></script>
+        <script type="text/javascript" src="/assets/js/dependencies/sha-256.min.js"></script>
+        <script type="text/javascript" src="/assets/js/qz-tray.js"></script>
+        <script src="/assets/js/cashier.js"></script>
+
+       
