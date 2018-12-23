@@ -11,7 +11,7 @@ class SuppliersController < ApplicationController
 
   def create
     supplier = Supplier.new supplier_params
-    return redirect_to new_supplier_path if supplier.invalid?
+    return redirect_to new_suppliers_path if supplier.invalid?
     supplier.save!
     return redirect_to suppliers_path
   end
@@ -34,7 +34,7 @@ class SuppliersController < ApplicationController
   private
     def supplier_params
       params.require(:supplier).permit(
-        :pic, :address, :phone, :supplier_type
+        :name, :address, :phone, :supplier_type
       )
     end
 

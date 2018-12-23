@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 2018_12_03_122858) do
+ActiveRecord::Schema.define(version: 2018_12_07_132301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,10 +98,24 @@ ActiveRecord::Schema.define(version: 2018_12_03_122858) do
   end
 
   create_table "suppliers", force: :cascade do |t|
-    t.string "pic", default: "DEFAULT NAME SUPPLIER", null: false
+    t.string "name", default: "DEFAULT NAME SUPPLIER", null: false
     t.string "address", default: "DEFAULT ADDRESS SUPPLIER", null: false
     t.bigint "phone", default: 123456789, null: false
     t.integer "supplier_type", default: 0
+  end
+
+  create_table "table_trx_types", force: :cascade do |t|
+    t.string "name", default: "DEFAULT", null: false
+  end
+
+  create_table "transaction_items", force: :cascade do |t|
+  end
+
+  create_table "transaction_types", force: :cascade do |t|
+    t.string "name", null: false
+  end
+
+  create_table "transactions", force: :cascade do |t|
   end
 
   create_table "transfer_items", force: :cascade do |t|
@@ -130,20 +143,6 @@ ActiveRecord::Schema.define(version: 2018_12_03_122858) do
     t.bigint "to_store_id", null: false
     t.index ["from_store_id"], name: "index_transfers_on_from_store_id"
     t.index ["to_store_id"], name: "index_transfers_on_to_store_id"
-  end
-
-  create_table "table_trx_types", force: :cascade do |t|
-    t.string "name", default: "DEFAULT", null: false
-  end
-
-  create_table "transaction_items", force: :cascade do |t|
-  end
-
-  create_table "transaction_types", force: :cascade do |t|
-    t.string "name", null: false
-  end
-
-  create_table "transactions", force: :cascade do |t|
   end
 
   create_table "users", force: :cascade do |t|

@@ -12,7 +12,7 @@ h2
         select class="selectpicker form-control" data-show-subtext="true" data-live-search="true" name="retur[supplier_id]"
           - @suppliers.each do |supplier|
             option data-subtext="#{supplier.address}" value="#{supplier.id}"
-              | #{supplier.pic}
+              | #{supplier.name}
         / input type="text" class="form-control" disabled=true value="GUDANG"
   hr style="border-top: 1px solid black;"
   .row

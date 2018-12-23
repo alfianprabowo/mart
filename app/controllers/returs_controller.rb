@@ -5,7 +5,7 @@ class RetursController < ApplicationController
   end
 
   def new
-    @suppliers = Supplier.select(:id, :pic, :address).order("supplier_type DESC").all
+    @suppliers = Supplier.select(:id, :name, :address).order("supplier_type DESC").all
   end
 
   def create

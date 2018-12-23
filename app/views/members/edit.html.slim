@@ -1,5 +1,5 @@
 h2
-  | UBAH ITEM - #{@member.name}
+  | UBAH MEMBER - #{@member.name}
 = form_for :member, url: member_path(id: @member.id), method: "PUT" do |form|
   .form-group
     label for="name" Nama

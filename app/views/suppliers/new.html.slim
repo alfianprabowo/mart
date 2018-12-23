@@ -1,6 +1,6 @@
 h2
-  | TAMBAH TOKO
-= form_for :store, url: stores_path, method: "POST" do |form|
+  | TAMBAH SUPPLIER
+= form_for :supplier, url: suppliers_path, method: "POST" do |form|
   .form-group
     label for="name" Nama
     = form.text_field :name, required: true, class: "form-control", id: "name"
@@ -11,11 +11,4 @@ h2
     label for="phone" Nomor Telepon
     = form.number_field :phone, required: true, class: "form-control", id: "phone"
   .form-group
-    label for="type" Tipe Toko
-    select class="form-control" name="store[store][store_type]"
-      option value="retail"
-        | Retail
-      option value="warehouse"
-        | Gudang
-  .form-group
-    = form.submit "Tambah Toko", class: "btn btn-primary"
+    = form.submit "Tambah Supplier", class: "btn btn-primary"
