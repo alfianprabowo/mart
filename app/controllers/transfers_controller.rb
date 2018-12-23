@@ -2,6 +2,27 @@ class TransfersController < ApplicationController
   before_action :require_login
   def index
     @transfers = Transfer.page param_page
+    if params[:search].present?
+      search = params[:search].downcase
+      @search = search
+      search_arr = search.split(":")
+      if search_arr.size > 2
+        return redirect_back_no_access_right
+      elsif search_arr.size == 2
+        store = Store.where('lower(name) like ?', "%"+search_arr[1].downcase+"%").pluck(:id)
+        if store.present?
+          if search_arr[0]== "to"
+            @transfers = @transfers.where(to_store_id: store)
+          elsif search_arr[1]== "from"
+            @transfers = @transfers.where(from_store_id: store)
+          else
+            @transfers = @transfers.where("invoice like ?", "%"+ search_arr[1]+"%")
+          end
+        end
+      else
+        @transfers = @transfers.where("invoice like ?", "%"+ search+"%")
+      end
+    end
   end
 
   def new
@@ -22,47 +43,49 @@ class TransfersController < ApplicationController
 
     items.each do |item|
       check_item = Item.find item[0]
-      break if check_item.nil?
-      a = TransferItem.create item_id: item[0], transfer_id: transfer.id, request_quantity: item[1], description: item[2]
-      binding.pry
+      next if check_item.nil?
+      qty = item[1].to_i
+      next if qty < 1
+      TransferItem.create item_id: item[0], transfer_id: transfer.id, request_quantity: qty, description: item[2]
     end
     return redirect_to transfers_path
   end
 
   def confirmation
     return redirect_back_no_access_right unless params[:id].present?
-    @retur = Transfer.find params[:id]
-    return redirect_back_no_access_right unless @retur.date_picked.present?
-    return redirect_to transfers_path unless @retur.present?
-    @retur_items = TransferItem.where(retur_id: @retur.id)
+    @transfer = Transfer.find params[:id]
+    return redirect_to transfers_path unless @transfer.present?
+    return redirect_to transfers_path if @transfer.date_approve.present?
+    @transfer_items = TransferItem.where(transfer_id: @transfer.id)
   end
 
   def accept
     return redirect_back_no_access_right unless params[:id].present?
-    retur = Transfer.find params[:id]
-    return redirect_back_no_access_right unless @retur.date_picked.present?
-    return redirect_back_no_access_right if retur.nil?
-    items = retur_items
-    items.each do |item|
-      retur_item = TransferItem.find item[0]
-      break if retur_item.nil?
-      break if retur_item.quantity < item[1].to_i
-      retur_item.accept_item = item[1]
-      retur_item.save!
-    end
-    retur.date_approve = Time.now
-    retur.save!
-    return redirect_to retur_items_path(id: params[:id])
+    transfer = Transfer.find params[:id]
+    return redirect back_no_access_right unless transfer.present?
+    return redirect_back_no_access_right if transfer.date_confirm.present? || transfer.date_picked.present?
+    transfer.date_approve = Time.now
+    transfer.save!
+    return redirect_to transfer_path id: params[:id]
   end
 
   def picked
     return redirect_back_no_access_right unless params[:id].present?
-    retur = Transfer.find params[:id]
-    return redirect_back_no_access_right if retur.nil?
-    # return redirect_back_no_access_right if retur.date_picked.present?
-    retur.date_picked = Time.now
-    retur.save!
-    decrease_stock params[:id]
+    @transfer = Transfer.find params[:id]
+    return redirect_back_no_access_right unless @transfer.present?
+    return redirect_back_no_access_right if @transfer.date_approve.nil? || @transfer.date_picked.present?
+    @transfer_items = TransferItem.where(transfer_id: @transfer.id)
+  end
+
+  def sent
+    return redirect_back_no_access_right unless params[:id].present?
+    transfer = Transfer.find params[:id]
+    return redirect_back_no_access_right if transfer.nil?
+    return redirect_back_no_access_right if transfer.date_picked.present? || transfer.date_picked.present?
+    transfer.date_picked = Time.now
+    transfer.save!
+    decrease_stock
+    sent_items params[:id]
     return redirect_to transfers_path
   end
 
@@ -85,14 +108,26 @@ class TransfersController < ApplicationController
       items
     end
 
-    def decrease_stock retur_id
-      retur_items = TransferItem.where(retur_id: retur_id)
-      retur_items.each do |retur_item|
-        confirmation = retur_item.accept_item
-        item = StoreItem.find_by(item_id: retur_item.item.id, store_id: current_user.store.id)
-        new_stock = item.stock.to_i - confirmation.to_i
-        item.stock = new_stock
-        item.save!
+    def sent_items transfer_id
+      transfer_items.each do |item|
+        transfer_item = TransferItem.find item[2]
+        qty = item[1].to_i
+        next if qty < 1
+        if transfer_item.request_quantity < qty
+          qty = transfer_item.request_quantity
+        end
+        transfer_item.sent_quantity = qty
+        transfer_item.save!
+      end
+    end
+
+    def decrease_stock
+      transfer_items.each do |item|
+        sent_total_item = item[1]
+        store_item = StoreItem.find_by(item_id: item[0], store_id: current_user.store.id)
+        new_stock = store_item.stock.to_i - sent_total_item.to_i
+        store_item.stock = new_stock
+        store_item.save!
       end
     end
 
