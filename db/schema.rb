@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_07_132301) do
+
+ActiveRecord::Schema.define(version: 2018_12_25_173220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +34,7 @@ ActiveRecord::Schema.define(version: 2018_12_07_132301) do
     t.string "name", null: false
     t.string "id_card"
     t.string "card_number", null: false
-    t.bigint "phone", null: false
+    t.string "phone", null: false
     t.integer "sex"
     t.string "address"
     t.datetime "created_at", null: false
@@ -80,7 +81,7 @@ ActiveRecord::Schema.define(version: 2018_12_07_132301) do
   create_table "stores", force: :cascade do |t|
     t.string "name", default: "DEFAULT STORE NAME", null: false
     t.string "address", default: "DEFAULT STORE ADDRESS", null: false
-    t.bigint "phone", default: 1234567, null: false
+    t.string "phone", default: "1234567", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "store_type", default: 0
@@ -100,7 +101,7 @@ ActiveRecord::Schema.define(version: 2018_12_07_132301) do
   create_table "suppliers", force: :cascade do |t|
     t.string "name", default: "DEFAULT NAME SUPPLIER", null: false
     t.string "address", default: "DEFAULT ADDRESS SUPPLIER", null: false
-    t.bigint "phone", default: 123456789, null: false
+    t.string "phone", default: "123456789", null: false
     t.integer "supplier_type", default: 0
   end
 
@@ -154,7 +155,7 @@ ActiveRecord::Schema.define(version: 2018_12_07_132301) do
     t.string "encrypted_password", limit: 128
     t.string "confirmation_token", limit: 128
     t.string "remember_token", limit: 128
-    t.bigint "phone", default: 8123456789, null: false
+    t.string "phone", default: "8123456789", null: false
     t.string "address", default: "DEFAULT ADDRESS", null: false
     t.bigint "id_card", default: 123456789123456, null: false
     t.integer "sex", default: 0, null: false

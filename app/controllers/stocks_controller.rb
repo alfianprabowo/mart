@@ -4,6 +4,13 @@ class StocksController < ApplicationController
     @inventories = StoreItem.page param_page
     store_id = current_user.store.id
     @inventories = @inventories.where(store_id: store_id)
+    if params[:search].present?
+      @search = params[:search].downcase
+      search = "%"+@search+"%"
+      items = Item.where('lower(name) like ? OR code like ?', search, search).pluck(:id)
+      @inventories = @inventories.where(item_id: items)
+    end
+
   end
 
   def edit

@@ -2,6 +2,11 @@ class ItemsController < ApplicationController
   before_action :require_login
   def index
     @items = Item.page param_page
+    if params[:search].present?
+      @search = params[:search].downcase
+      search = "%"+@search+"%"
+      @items = @items.where("lower(name) like ? OR code like ?", search, search)
+    end
   end
 
   def new

@@ -1,8 +1,16 @@
 .row
-  .col-md-6
+  .col-md-4
     h2
       | Daftar Barang
-  .col-md-6.text-right
+  .col-md-4
+    .row
+      = form_for :items, url: items_path, method: 'GET' do |form|
+        .col-md-10
+          input type="text" class="form-control" id="search" name="search"
+        .col-md-2
+          button class="btn btn-primary"
+            | Cari
+  .col-md-4.text-right
     a href="#{new_item_path}"
       button.btn.btn-primary type="button" 
         i.fas.fa-plus 

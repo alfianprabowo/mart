@@ -2,6 +2,15 @@
   .col-md-6
     h2
       | Daftar Supplier
+  .col-md-4
+    .row
+      = form_for :supplier, url: suppliers_path, method: 'GET' do |form|
+        .col-md-10
+          input type="text" class="form-control" id="search" name="search"
+        .col-md-2
+          button class="btn btn-primary"
+            | Cari
+
   .col-md-6.text-right
     a href="#{new_supplier_path}"
       button.btn.btn-primary type="button" 

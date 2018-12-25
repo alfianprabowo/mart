@@ -2,6 +2,26 @@ class RetursController < ApplicationController
   before_action :require_login
   def index
     @returs = Retur.page param_page
+    if params[:search].present?
+      search = params[:search].downcase
+      @search = search
+      search_arr = search.split(":")
+      if search_arr.size > 2
+        return redirect_back_no_access_right
+      elsif search_arr.size == 2
+        store = Store.where('lower(name) like ?', "%"+search_arr[1].downcase+"%").pluck(:id)
+        supplier = Supplier.where('lower(pic) like ?', "%"+search_arr[1].downcase+"%").pluck(:id)
+          if search_arr[0]== "to" && supplier.present?
+            @returs = @returs.where(supplier_id: supplier)
+          elsif search_arr[0]== "from" && store.present?
+            @returs = @returs.where(store_id: store)
+          else
+            @returs = @returs.where("invoice like ?", "%"+ search_arr[1]+"%")
+          end
+      else
+        @returs = @returs.where("invoice like ?", "%"+ search+"%")
+      end
+    end
   end
 
   def new

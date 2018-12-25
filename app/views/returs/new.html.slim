@@ -24,9 +24,9 @@ h2
       .form-group
         label for="item" Item
         select class="selectpicker form-control" data-show-subtext="true" data-live-search="true" name="retur[retur_items][0][item_id]"
-          option data-subtext="id: 6" value= 6
+          option data-subtext="id: 1" value=1
             | A
-          option data-subtext="id: 8" value=8
+          option data-subtext="id: 2" value=2
             | B
     .col-md-4
       .form-group
@@ -41,9 +41,9 @@ h2
       .form-group
         label for="item" Item
         select class="selectpicker form-control" data-show-subtext="true" data-live-search="true" name="retur[retur_items][1][item_id]"
-          option data-subtext="id: 6" value=6
+          option data-subtext="id: 1" value=1
             | A
-          option data-subtext="id: 8" value=8
+          option data-subtext="id: 2" value=2
             | B
     .col-md-4
       .form-group
@@ -53,22 +53,22 @@ h2
       .form-group
         label for="description" Deskripsi
         input type="textarea" required=true class="form-control" id="description" name="retur[retur_items][1][description]"
-    
-    .col-md-4
-      .form-group
-        label for="item" Item
-        select class="selectpicker form-control" data-show-subtext="true" data-live-search="true" name="retur[retur_items][2][item_id]"
-          option data-subtext="id: 6" value=6
-            | A
-          option data-subtext="id: 8" value=8
-            | B
-    .col-md-4
-      .form-group
-        label for="quantity" Jumlah
-        input type="number" required=true class="form-control" id="quantity" name="retur[retur_items][2][quantity]"
-    .col-md-4
-      .form-group
-        label for="description" Deskripsi
-        input type="tetxtarea" required=true class="form-control" id="description" name="retur[retur_items][2][description]"
+        /
+    / .col-md-4
+    /   .form-group
+    /     label for="item" Item
+    /     select class="selectpicker form-control" data-show-subtext="true" data-live-search="true" name="retur[retur_items][2][item_id]"
+    /       option data-subtext="id: 6" value=6
+    /         | A
+    /       option data-subtext="id: 8" value=8
+    /         | B
+    / .col-md-4
+    /   .form-group
+    /     label for="quantity" Jumlah
+    /     input type="number" required=true class="form-control" id="quantity" name="retur[retur_items][2][quantity]"
+    / .col-md-4
+    /   .form-group
+    /     label for="description" Deskripsi
+    /     input type="tetxtarea" required=true class="form-control" id="description" name="retur[retur_items][2][description]"
     .form-group.text-center
       = form.submit "Buat Retur", class: "btn btn-primary"
