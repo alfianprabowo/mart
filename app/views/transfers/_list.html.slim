@@ -1,10 +1,8 @@
 tr
   td #{transfer.invoice}
-  / td #{transfer.total_items}
-  td 
-    | 0
   td #{transfer.from_store.name}
   td #{transfer.to_store.name}
+  td #{transfer.total_items}
   td #{transfer.date_created.to_date}
   td
     - if transfer.date_approve.nil?
