@@ -2,6 +2,11 @@ class MembersController < ApplicationController
   before_action :require_login
   def index
     @members = Member.page param_page
+    if params[:search].present?
+      @search = params[:search].downcase
+      search = "%"+@search+"%"
+      @members = @members.where("lower(name) like ? OR phone like ?", search, search)
+    end
   end
 
   def new

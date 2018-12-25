@@ -1,5 +1,16 @@
-h2
-  | Daftar Stok Barang
+.row
+  .col-md-6
+    h2
+      | Daftar Stok Barang
+  .col-md-6
+    .row
+      = form_for :store_item, url: stocks_path, method: 'GET' do |form|
+        .col-md-10
+          input type="text" class="form-control" id="search" name="search"
+        .col-md-2
+          button class="btn btn-primary"
+            | Cari
+
 table class="table"
   thead
     th Code

@@ -3,6 +3,12 @@ class SuppliersController < ApplicationController
   def index
     @suppliers = Supplier.page param_page
     @suppliers = @suppliers.where(supplier_type: 0)
+    if params[:search].present?
+      @search = params[:search].downcase
+      search = "%"+@search+"%"
+      @suppliers = @suppliers.where("lower(pic) like ? OR phone like ?", search, search)
+    end
+
   end
 
   def new

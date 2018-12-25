@@ -2,6 +2,12 @@ class UsersController < ApplicationController
   before_action :require_login
   def index
     @users = User.page param_page
+    if params[:search].present?
+      @search = params[:search].downcase
+      search = "%"+@search+"%"
+      @users = @users.where("lower(name) like ? OR phone like ?", search, search)
+    end
+
   end
 
   def new

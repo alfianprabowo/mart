@@ -2,6 +2,16 @@ class ItemCatsController < ApplicationController
   before_action :require_login
   def index
     @item_cats = ItemCat.page param_page
+    if params[:search].present?
+      @search = params[:search].downcase
+      search = "%"+@search+"%"
+      search_arr = search.split(":")
+      if search_arr.size == 2
+        @item_cats = @item_cats.where("lower(name) like ?", search)
+      else
+        @item_cats = @item_cats.where("lower(name) like ?", search)
+      end
+    end
   end
 
   def new
