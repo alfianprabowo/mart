@@ -44,5 +44,6 @@ Rails.application.routes.draw do
   resources :transfer_items, only: %i[index new create edit update]
   resources :transaction_types, only: %i[index new create edit update]
   resources :transactions, only: %i[index new create edit update]
+  resources :transaction_items, only: %i[index new create edit update]
   resources :cashier, only: %i[index new create edit update]
 end

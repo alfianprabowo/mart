@@ -1,0 +1,17 @@
+- transaction_id = @transaction_items.first.transaction.id
+.row
+  .col-md-6
+    h2
+      | Daftar Item Transaksi (#{@transaction_items.first.transaction.invoice})
+table class="table"
+  thead
+    th Kode
+    th Nama Barang
+    th Kategori
+    th Jumlah
+    th Harga
+    th Diskon
+    th Total
+  tbody
+    = render partial: 'list', collection: @transaction_items, as: :trx_item
+= paginate @transaction_items

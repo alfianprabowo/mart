@@ -6,7 +6,7 @@ class SuppliersController < ApplicationController
     if params[:search].present?
       @search = params[:search].downcase
       search = "%"+@search+"%"
-      @suppliers = @suppliers.where("lower(pic) like ? OR phone like ?", search, search)
+      @suppliers = @suppliers.where("lower(name) like ? OR phone like ?", search, search)
     end
 
   end

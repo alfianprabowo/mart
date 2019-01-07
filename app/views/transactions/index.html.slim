@@ -1,2 +1,29 @@
-<h1>Transaction#index</h1>
-<p>Find me in app/views/transaction/index.html.erb</p>
+.row
+  .col-md-4
+    h2
+      | Daftar Transaksi
+  .col-md-4
+    .row
+      = form_for :transaction, url: transactions_path, method: 'GET' do |form|
+        .col-md-10
+          input type="text" class="form-control" id="search" name="search"
+        .col-md-2
+          button class="btn btn-primary"
+            | Cari
+
+  .col-md-4.text-right
+    a href="#{new_retur_path}"
+      button.btn.btn-primary type="button" 
+        i.fas.fa-plus 
+        |   Buat Transaksi
+		
+table class="table"
+  thead
+    th Invoice
+	th Tanggal
+    th Total Item
+    th Total harga
+    th Action
+  tbody
+    = render partial: 'list', collection: @transaction, as: :transaction
+= paginate @transaction
